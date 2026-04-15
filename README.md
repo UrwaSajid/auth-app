@@ -18,8 +18,8 @@ Automated tests ensure the authentication logic works correctly for all valid an
 | Type              | Count | Status |
 |-------------------|-------|--------|
 | Unit Tests        | 14    | ✅ Pass |
-| Integration Tests  | 14    | ✅ Pass |
-| **Total**         | **28**| ✅ Pass |
+| Integration Tests | 20    | ✅ Pass |
+| **Total**         | **34**| ✅ Pass |
 
 ## Jenkins Pipeline Stages
 1. **Checkout Code** — Pulls latest code from GitHub
@@ -43,5 +43,5 @@ npm run test:integration
 - Jenkins test report
 
 ## Author
-- **Name:** Your Name Here
+- **Name:** Urwa Sajid
 - **Submission Date:** April 2026
