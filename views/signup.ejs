@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <h2>Signup</h2>
+    <% if (error) { %><p id="error-msg" style="color:red"><%= error %></p><% } %>
+    <% if (success) { %><p id="success-msg" style="color:green"><%= success %></p><% } %>
+    <form method="POST" action="/signup">
+      <input type="text" name="username" id="username" placeholder="Username" /><br/>
+      <input type="email" name="email" id="email" placeholder="Email" /><br/>
+      <input type="password" name="password" id="password" placeholder="Password" /><br/>
+      <button type="submit" id="signup-btn">Sign Up</button>
+    </form>
+    <a href="/login">Already have an account? Login</a>
+  </body>
+</html>
