@@ -21,7 +21,7 @@
     "express-session": "^1.19.0"
   },
   "devDependencies": {
-    "chai": "^6.2.2",
+    "chai": "^4.3.10",
     "mocha": "^11.7.5"
   }
 }
