@@ -4,9 +4,12 @@ const LoginPage = require('../pages/LoginPage');
 const SignupPage = require('../pages/SignupPage');
 
 // Simulated in-memory user store (mirrors the app)
-const users = [{ username: 'testuser', email: 'test@example.com', password: 'password123' }];
+const users = [{ username: 'testuser', email: 'TEST@EXAMPLE.COM', password: 'password123' }];
 
 function simulateLogin(email, password) {
+  if (email && email.includes('@') && email !== email.toUpperCase())
+    return { success: false, error: 'Email must be in uppercase' };
+
   const emailCheck = validateEmail(email);
   if (!emailCheck.valid) return { success: false, error: emailCheck.message };
 
@@ -18,6 +21,7 @@ function simulateLogin(email, password) {
 
   return { success: true, user };
 }
+
 
 function simulateSignup(username, email, password) {
   const usernameCheck = validateUsername(username);
@@ -40,21 +44,27 @@ describe('Login Page Integration Tests', () => {
   const loginPage = new LoginPage();
 
   it('should login successfully with valid credentials', () => {
-    const result = simulateLogin('test@example.com', 'password123');
+    const result = simulateLogin('TEST@EXAMPLE.COM', 'password123');
     expect(result.success).to.be.true;
     expect(result.user.username).to.equal('testuser');
   });
 
   it('should fail login with wrong password', () => {
-    const result = simulateLogin('test@example.com', 'wrongpass');
+    const result = simulateLogin('TEST@EXAMPLE.COM', 'wrongpass');
     expect(result.success).to.be.false;
     expect(result.error).to.equal('Invalid credentials');
   });
 
   it('should fail login with non-existing user', () => {
-    const result = simulateLogin('noone@example.com', 'password123');
+    const result = simulateLogin('NOONE@EXAMPLE.COM', 'password123');
     expect(result.success).to.be.false;
     expect(result.error).to.equal('Invalid credentials');
+  });
+
+  it('should fail login with lowercase email', () => {
+    const result = simulateLogin('test@example.com', 'password123');
+    expect(result.success).to.be.false;
+    expect(result.error).to.equal('Email must be in uppercase');
   });
 
   it('should fail login with empty form fields', () => {
@@ -112,7 +122,7 @@ describe('Signup Page Integration Tests', () => {
   });
 
   it('should fail signup if email already exists', () => {
-    const result = simulateSignup('testuser2', 'test@example.com', 'pass123');
+    const result = simulateSignup('testuser2', 'TEST@EXAMPLE.COM', 'pass123');
     expect(result.success).to.be.false;
     expect(result.error).to.equal('Email already registered');
   });
